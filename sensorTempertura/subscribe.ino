@@ -8,17 +8,17 @@ void handleTemperatura(AdafruitIO_Data *data) {
 
   //lógica para acender ou não o led
   if(temp < 0){
-    digitalWrite(pinLed, HIGH);
+    digitalWrite(pinLedRed, HIGH);
   }
   else{
-    digitalWrite(pinLed, LOW);
+    digitalWrite(pinLedRed, LOW);
   }
 }
 
 void handleBotaoLed(AdafruitIO_Data *data) {
-  if (!data->toBool()) {
-    digitalWrite(pinLed, HIGH);
+  if (!data -> toBool()) {
+    digitalWrite(pinLedRed, HIGH);
   } else {
-    digitalWrite(pinLed, LOW);
+    digitalWrite(pinLedRed, LOW);
   }
 }

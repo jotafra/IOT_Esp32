@@ -15,12 +15,15 @@ void handleAlarme(AdafruitIO_Data *data){
 }
 
 void ativarAlerta(){
+  digitalWrite(LED_ALARMEG, LOW);
   digitalWrite(BUZZER_PIN, HIGH);
-  digitalWrite(LED_ALARME, HIGH);
+  digitalWrite(LED_ALARMER, HIGH);
+
 }
 
 void desligarAlerta(){
+  digitalWrite(LED_ALARMEG, HIGH);
   digitalWrite(BUZZER_PIN, LOW);
-  digitalWrite(LED_ALARME, LOW);
+  digitalWrite(LED_ALARMER, LOW);
 }
 

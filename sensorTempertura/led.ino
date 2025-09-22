@@ -1,7 +1,7 @@
 
 void testeLed(){
-  digitalWrite(LED_ALARME, HIGH);
+  digitalWrite(LED_ALARMER, HIGH);
   delay(500);
-  digitalWrite(LED_ALARME, LOW);
+  digitalWrite(LED_ALARMER, LOW);
   delay(500);
 }

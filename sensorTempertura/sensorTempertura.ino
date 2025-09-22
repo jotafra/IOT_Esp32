@@ -9,10 +9,12 @@
 AdafruitIO_WiFi io(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PASS);
 
 #define pinNTC 34 // pino do sensor de temperatura
-#define pinLed 14 // pino do led
+#define pinLedRed 14 // pino do led
+#define pinLedGreen 16 // pino do led
 
 #define BUZZER_PIN 27
-#define LED_ALARME 13
+#define LED_ALARMER 13
+#define LED_ALARMEG 15
 #define BOTAO_FISICO 26
 #define TRIG_PIN 12
 #define ECHO_PIN 14 
@@ -32,6 +34,7 @@ float temp_anterior = -1;
 AdafruitIO_Feed *temperatura = io.feed("Temperatura");
 AdafruitIO_Feed *ledFeed = io.feed("botaoled");
 AdafruitIO_Feed *botaoAlarme = io.feed("botaoalarme");
+AdafruitIO_Feed *distanciaultrassom = io.feed("distanciaultrassom");
 
 const float Rfixo = 10000.0; // Resistor do projeto 
 const float Beta = 3950.0; 
@@ -50,7 +53,8 @@ void setup() {
   pinMode(BOTAO_FISICO, INPUT);
 
   pinMode(pinNTC, INPUT);
-  pinMode(pinLed, OUTPUT);
+  pinMode(pinLedRed, OUTPUT);
+  pinMode(pinLedGreen, OUTPUT);
   Serial.begin(115200);
 
   while(!Serial);
@@ -95,6 +99,10 @@ void loop() {
   Serial.println(distancia);
   Serial.print(" cm");
 
+  if(distancia != 0){
+    distanciaultrassom -> save(distancia);
+  }
+
   // Ativação ou desativação do alarme
   if(alarmeAtivo && distancia > 0 && distancia < LIMITE_DISTANCIA){
     ativarAlerta();
@@ -102,5 +110,6 @@ void loop() {
     desligarAlerta();
   }
 
+  delay(3000); // debounce simples 
 
 }
